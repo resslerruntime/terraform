@@ -126,24 +126,24 @@ func TestNonsensitive(t *testing.T) {
 			``,
 		},
 
-		// Passing a value that is already non-sensitive is an error,
-		// because this function should always be used with specific
-		// intention, not just as a "make everything visible" hammer.
+		// Passing a value that is already non-sensitive is not an error,
+		// because this function can be called with unknown values during the
+		// validate walk, which may later become sensitive when known.
 		{
 			cty.NumberIntVal(1),
-			`the given value is not sensitive, so this call is redundant`,
+			``,
 		},
 		{
 			cty.DynamicVal,
-			`the given value is not sensitive, so this call is redundant`,
+			``,
 		},
 		{
 			cty.NullVal(cty.String),
-			`the given value is not sensitive, so this call is redundant`,
+			``,
 		},
 		{
 			cty.UnknownVal(cty.String),
-			`the given value is not sensitive, so this call is redundant`,
+			``,
 		},
 	}
 

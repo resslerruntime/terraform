@@ -74,11 +74,6 @@ due to an inappropriate call to `nonsensitive` in your module, that's a bug in
 your module and not a bug in Terraform itself.
 **Use this function sparingly and only with due care.**
 
-`nonsensitive` will return an error if you pass a value that isn't marked
-as sensitive, because such a call would be redundant and potentially confusing
-or misleading to a future maintainer of your module. Use `nonsensitive` only
-after careful consideration and with definite intent.
-
 Consider including a comment adjacent to your call to explain to future
 maintainers what makes the usage safe and thus what invariants they must take
 care to preserve under future modifications.
@@ -100,11 +95,7 @@ the local value `mixed_content`, with a valid JSON string assigned to
 > nonsensitive(local.mixed_content["username"])
 "zqb"
 > nonsensitive("clear")
-
-Error: Invalid function argument
-
-Invalid value for "value" parameter: the given value is not sensitive, so this
-call is redundant.
+"clear"
 ```
 
 Note though that it's always your responsibility to use `nonsensitive` only
